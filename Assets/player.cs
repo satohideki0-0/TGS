@@ -3,8 +3,11 @@ using UnityEngine.InputSystem;
 
 public class player : MonoBehaviour
 {
-    public float moveSpeed = 5f;//ˆÚ“®‘¬“x
-    public float jumpForce = 7f;//ƒWƒƒƒ“ƒv—Í
+    public float moveSpeed = 5f;
+    public float jumpForce = 7f;
+    public GameObject bulletPrefab;
+    public Transform firePoint; // ï¿½eï¿½Ì”ï¿½ï¿½ËˆÊ’u
+
     private Vector2 movementInput;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -17,9 +20,15 @@ public class player : MonoBehaviour
     private void Update()
     {
         Move();
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z)) // Zï¿½Lï¿½[ï¿½Å’eï¿½ð”­Žï¿½
+        {
+            Fire();
         }
     }
 
@@ -34,6 +43,11 @@ public class player : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         isGrounded = false;
+    }
+
+    private void Fire()
+    {
+        Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
