@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class HomingBullet : MonoBehaviour
 {
-    public float speed = 5f;            // ’e‚Ì‘¬“x
-    public float rotateSpeed = 200f;    // ‰ñ“]‘¬“x
-    public float homingStrength = 0.5f; // ƒz[ƒ~ƒ“ƒO‹­“xi0.0 ? 1.0j
+    public float speed = 5f;            // ï¿½eï¿½Ì‘ï¿½ï¿½x
+    public float rotateSpeed = 200f;    // ï¿½ï¿½]ï¿½ï¿½ï¿½x
+    public float homingStrength = 0.5f; // ï¿½zï¿½[ï¿½~ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½xï¿½i0.0 ? 1.0ï¿½j
     public int damage = 1;
     public float lifetime = 3f;
 
@@ -24,18 +24,17 @@ public class HomingBullet : MonoBehaviour
             return;
         }
 
-        // “G‚Ö‚Ì•ûŒüƒxƒNƒgƒ‹‚ğŒvZ
+       
         Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
         direction.Normalize();
 
-        // Œ»İ‚Ì’e‚ÌŒü‚«‚ğ•â³‚·‚éiƒz[ƒ~ƒ“ƒO‹­“x‚É‰‚¶‚½•â³j
+        
         Vector2 currentDirection = transform.right;
         Vector2 newDirection = Vector2.Lerp(currentDirection, direction, homingStrength).normalized;
 
-        // ‰ñ“]‚ğ§Œä
         float rotateAmount = Vector3.Cross(newDirection, currentDirection).z;
         GetComponent<Rigidbody2D>().angularVelocity = -rotateAmount * rotateSpeed;
-        GetComponent<Rigidbody2D>().velocity = newDirection * speed;
+        GetComponent<Rigidbody2D>().linearVelocity = newDirection * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

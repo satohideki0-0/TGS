@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class EnemyTankBullet : MonoBehaviour
 {
-    public GameObject mortarPrefab;  // ”—Œ‚–C’e‚ÌƒvƒŒƒnƒu
-    public Transform target;  // –Ú•W’n“_iƒvƒŒƒCƒ„[‚È‚Çj
-    public float fireRate = 3f;  // –CŒ‚‚ÌŠÔŠu
-    public float launchAngle = 45f;  // ”­ËŠp“xi“x’PˆÊj
+    public GameObject mortarPrefab;  // ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½eï¿½Ìƒvï¿½ï¿½ï¿½nï¿½u
+    public Transform target;  // ï¿½Ú•Wï¿½nï¿½_ï¿½iï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½È‚Çj
+    public float fireRate = 3f;  // ï¿½Cï¿½ï¿½ï¿½ÌŠÔŠu
+    public float launchAngle = 45f;  // ï¿½ï¿½ï¿½ËŠpï¿½xï¿½iï¿½xï¿½Pï¿½Êj
 
     private float nextFireTime = 0f;
 
@@ -22,7 +22,7 @@ public class EnemyTankBullet : MonoBehaviour
     {
         if (target == null) return;
 
-        // ”—Œ‚–C’e‚ğ¶¬
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½eï¿½ğ¶ï¿½
         GameObject mortar = Instantiate(mortarPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rb = mortar.GetComponent<Rigidbody2D>();
 
@@ -31,13 +31,13 @@ public class EnemyTankBullet : MonoBehaviour
             Vector2 direction = (target.position - transform.position).normalized;
             float distance = Vector2.Distance(transform.position, target.position);
 
-            // •K—v‚È‰‘¬‚ğŒvZi“Š±Œö®‚ğg—pj
+            // ï¿½Kï¿½vï¿½Èï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Zï¿½iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½j
             float angleRad = launchAngle * Mathf.Deg2Rad;
             float speed = Mathf.Sqrt(distance * Physics2D.gravity.magnitude / Mathf.Sin(2 * angleRad));
 
-            // ‰‘¬“x‚ğİ’è
+            // ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½İ’ï¿½
             Vector2 velocity = new Vector2(direction.x * speed, Mathf.Abs(direction.y * speed));
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
         }
     }
 }
