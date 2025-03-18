@@ -13,7 +13,7 @@ public class EnemyTankBullet : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
-            FireMortar();
+            //FireMortar();
             nextFireTime = Time.time + fireRate;
         }
     }
