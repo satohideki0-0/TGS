@@ -4,16 +4,14 @@ using TMPro;
 public class TalkManager : MonoBehaviour
 {
     public TMP_Text talkText; // TextMeshProを使用
-    public GameObject talkCanvas;
-
     private TalkData currentTalkData;
-    private int talkIndex = 0;
+    private int talkIndex;
 
     public void StartTalk(TalkData talkData)
     {
         currentTalkData = talkData;
-        talkIndex = 1;
-        talkCanvas.SetActive(true);
+        talkIndex = 0;
+        gameObject.SetActive(true);
         ShowNextMessage();
     }
 
@@ -31,7 +29,8 @@ public class TalkManager : MonoBehaviour
 
     public void EndTalk()
     {
-        talkCanvas.SetActive(false);
-        currentTalkData = null;
+        gameObject.SetActive(false);
+        // TalkEvent クラスの isTalk を false に設定する
+        FindObjectOfType<TalkEvent>().EndTalk();
     }
 }

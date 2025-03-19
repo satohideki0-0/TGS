@@ -3557,6 +3557,8 @@ MonoBehaviour:
   player: {fileID: 1342711619}
   interactImage: {fileID: 1864308395}
   talkCanvas: {fileID: 1354521133}
+  talkManager: {fileID: 1354521138}
+  talkData: {fileID: 11400000, guid: 8acb1f12ba2c36940a6a1b6745446ec4, type: 2}
 --- !u!114 &373406741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,7 +3572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkText: {fileID: 758655535}
-  talkCanvas: {fileID: 1441356197}
 --- !u!114 &373406742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17845,7 +17846,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkText: {fileID: 412667146}
-  talkCanvas: {fileID: 1354521133}
 --- !u!1 &1355097856
 GameObject:
   m_ObjectHideFlags: 0
@@ -18145,7 +18145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   talkText: {fileID: 758655535}
-  talkCanvas: {fileID: 1441356197}
 --- !u!114 &1441356199
 MonoBehaviour:
   m_ObjectHideFlags: 0
