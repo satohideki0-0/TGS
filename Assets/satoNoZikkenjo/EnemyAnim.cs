@@ -39,14 +39,6 @@ public class EnemyAnim : MonoBehaviour
         }
 
 
-        ////検知範囲内に入った
-        //if (distanceToPlayer < attackRange)
-        //{
-        //    ChangeState(State.Attack);
-        //    Debug.Log("待機");
-
-        //}
-
         //検知範囲外に出た
         if (distanceToPlayer > detectionRange)
         {
@@ -57,6 +49,9 @@ public class EnemyAnim : MonoBehaviour
 
 
         //攻撃範囲内
+        //待機が再生された後に攻撃再生
+        //攻撃の最後のフレームにイベント
+
 
     }
 
