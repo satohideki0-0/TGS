@@ -1,34 +1,51 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public GameObject bulletPrefab;
-    public Transform firePoint; // �e�̔��ˈʒu
+    public Transform firePoint; // 弾の発射位置
 
+
+    public GameObject specialBall;
     private Vector2 movementInput;
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    private Animator animator;
+    private bool canMove = true; // プレイヤーが動けるかどうかのフラグ
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // Animator を取得
     }
 
     private void Update()
     {
-        Move();
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (canMove)
         {
-            Jump();
+            Move();
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                Jump();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z)) // Zで弾を発射
+            {
+                Fire();
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Z)) // Z�L�[�Œe�𔭎�
+        else
         {
-            Fire();
+            // アニメーションが終了するまで待機
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("SpecialAnimation") &&
+                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            {
+                canMove = true; // アニメーションが終了したらプレイヤーが動けるようになる
+            }
         }
     }
 
@@ -36,12 +53,12 @@ public class player : MonoBehaviour
     {
         movementInput.x = Input.GetAxisRaw("Horizontal");
         movementInput.Normalize();
-        rb.linearVelocity = new Vector2(movementInput.x * moveSpeed, rb.linearVelocity.y);
+        rb.velocity = new Vector2(movementInput.x * moveSpeed, rb.velocity.y);
     }
 
     private void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isGrounded = false;
     }
 
@@ -56,5 +73,20 @@ public class player : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    // アニメーション終了後にプレイヤーの操作を無効化するための関数
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+    public void EnableMovement()
+    {
+        canMove = true; // プレイヤーが動けるようにする
+    }
+
+    public void Destroy()
+    {
+        Destroy(specialBall.gameObject);
     }
 }

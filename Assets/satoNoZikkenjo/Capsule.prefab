@@ -103,8 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 5
   attackRange: 2
-  attackDelay: 1.5
-  moveSpeed: 2
   player: {fileID: 0}
 --- !u!95 &-3148122786483247511
 Animator:
